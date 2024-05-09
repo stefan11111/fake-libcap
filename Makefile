@@ -11,10 +11,9 @@ OBJ = libcap.o
 
 all: libcap.so.2.0.0
 
-.c.o:
-	${CC} ${XCFLAGS} -c -o $@ $<
-
-libcap.so.2.0.0: ${OBJ}
+libcap.so.2.0.0:
+	touch libcap.c
+	${CC} ${XCFLAGS} libcap.c -c ${OBJ}
 	${CC} ${XCFLAGS} -o $@ ${OBJ} ${XLDFLAGS}
 
 install: libcap.so.2.0.0
@@ -26,6 +25,6 @@ install: libcap.so.2.0.0
 uninstall:
 	rm -f ${DESTDIR}/usr${LIBDIR}/libcap.so.2.0.0 ${DESTDIR}/usr${LIBDIR}/libcap.so.2 ${DESTDIR}/usr${LIBDIR}/libcap.so
 clean:
-	rm -f libcap.so.2.0.0 ${OBJ}
+	rm -f libcap.so.2.0.0 ${OBJ} libcap.c
 
 .PHONY: all clean install uninstall
